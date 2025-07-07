@@ -34,13 +34,17 @@ function handleInput(value) {
 
 // Keyboard support
 document.addEventListener('keydown', e => {
+  const key = e.key;
   const validKeys = '0123456789+-*/.=cC';
-  if (validKeys.includes(e.key)) {
-    if (e.key === 'c' || e.key === 'C') handleInput('C');
-    else if (e.key === '=' || e.key === 'Enter') handleInput('=');
-    else handleInput(e.key);
-  } else if (e.key === 'Backspace') {
+
+  if (key === 'Enter') {
+    handleInput('=');
+  } else if (key === 'Backspace') {
     currentInput = currentInput.slice(0, -1);
     display.innerText = currentInput || '0';
+  } else if (validKeys.includes(key)) {
+    if (key === 'c' || key === 'C') handleInput('C');
+    else if (key === '=') handleInput('=');
+    else handleInput(key);
   }
 });
